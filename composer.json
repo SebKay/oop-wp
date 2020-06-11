@@ -1,0 +1,20 @@
+{
+    "name": "sebkay/wp-oop",
+    "authors": [
+        {
+            "name": "Seb Kay",
+            "email": "seb@sebkay.com",
+            "homepage": "https://sebkay.com"
+        }
+    ],
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "WP-OOP\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5"
+    }
+}

@@ -10,7 +10,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "WP-OOP\\": "src/"
+            "OOPWP\\": "src/"
         }
     },
     "license": "MIT",

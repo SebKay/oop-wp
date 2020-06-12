@@ -1,5 +1,6 @@
 {
     "name": "sebkay/oop-wp",
+    "version" : "1.0.0",
     "authors": [
         {
             "name": "Seb Kay",
@@ -10,7 +11,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "WP-OOP\\": "src/"
+            "OOPWP\\": "src/"
         }
     },
     "license": "MIT",

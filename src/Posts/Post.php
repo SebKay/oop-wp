@@ -112,6 +112,8 @@ class Post
      */
     public function parent()
     {
-        return new Post(($this->getPost()->post_parent ?? 0));
+        $parent_id = $this->getPost()->post_parent;
+
+        return ($parent_id ? new Post($parent_id) : null);
     }
 }

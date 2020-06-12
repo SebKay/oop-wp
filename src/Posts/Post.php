@@ -12,13 +12,9 @@ class Post
      *
      * @param integer $id
      */
-    public function __construct(int $id = 0)
+    public function __construct(int $id)
     {
-        $this->id = $id;
-
-        if (!$this->getPost()) {
-            throw new \Exception('Post not found.');
-        }
+        $this->id = ($id ?: -1);
 
         $this->date_format = \get_option('date_format');
     }
@@ -112,8 +108,6 @@ class Post
      */
     public function parent()
     {
-        $parent_id = $this->getPost()->post_parent;
-
-        return ($parent_id ? new Post($parent_id) : null);
+        return new Post($this->getPost()->post_parent);
     }
 }

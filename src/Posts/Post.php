@@ -76,7 +76,7 @@ class Post
      */
     public function format()
     {
-        return \get_post_format($this->id());
+        return (\get_post_format($this->id()) ?: 'standard');
     }
 
     /**

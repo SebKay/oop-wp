@@ -69,8 +69,10 @@ class Post
      * @param string $format
      * @return string
      */
-    public function publishDate($format = $this->date_format)
+    public function publishDate($format = null)
     {
+        $format = ($format ?: $this->date_format);
+
         return \get_the_date($format, $this->id);
     }
 
@@ -80,8 +82,10 @@ class Post
      * @param string $format
      * @return string
      */
-    public function modifiedDate($format = $this->date_format)
+    public function modifiedDate($format = null)
     {
+        $format = ($format ?: $this->date_format);
+        
         return \get_the_modified_time($format, $this->id);
     }
 

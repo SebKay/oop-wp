@@ -20,13 +20,33 @@ class Post
     }
 
     /**
+     * The ID
+     *
+     * @return int
+     */
+    public function id()
+    {
+        return $this->id;
+    }
+
+    /**
      * Get WP_Post object
      *
      * @return WP_Post
      */
     protected function getPost()
     {
-        return \get_post($this->id);
+        return \get_post($this->id());
+    }
+
+    /**
+     * The url
+     *
+     * @return string
+     */
+    public function url()
+    {
+        return \get_permalink($this->id());
     }
 
     /**
@@ -40,23 +60,43 @@ class Post
     }
 
     /**
+     * The status
+     *
+     * @return string
+     */
+    public function status()
+    {
+        return \get_post_status($this->id());
+    }
+
+    /**
+     * The format
+     *
+     * @return string
+     */
+    public function format()
+    {
+        return \get_post_format($this->id());
+    }
+
+    /**
      * The title
      *
      * @return string
      */
     public function title()
     {
-        return \get_the_title($this->id);
+        return \get_the_title($this->id());
     }
 
     /**
-     * The exceprt
+     * The excerpt
      *
      * @return string
      */
     public function excerpt()
     {
-        return \get_the_excerpt($this->id);
+        return \get_the_excerpt($this->id());
     }
 
     /**
@@ -69,7 +109,7 @@ class Post
     {
         $format = ($format ?: $this->date_format);
 
-        return \get_the_date($format, $this->id);
+        return \get_the_date($format, $this->id());
     }
 
     /**
@@ -82,7 +122,7 @@ class Post
     {
         $format = ($format ?: $this->date_format);
         
-        return \get_the_modified_time($format, $this->id);
+        return \get_the_modified_time($format, $this->id());
     }
 
     /**

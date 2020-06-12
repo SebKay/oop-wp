@@ -1,3 +1,5 @@
+![Test PHP](https://github.com/SebKay/oop-wp/workflows/Test%20PHP/badge.svg)
+
 # OOP WP
 A simple library of OOP style helpers for WordPress theme and plugin development.
 

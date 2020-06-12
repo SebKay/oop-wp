@@ -1,6 +1,6 @@
 <?php
 
-namespace OOPWP;
+namespace OOPWP\Posts;
 
 class Post
 {

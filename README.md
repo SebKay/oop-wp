@@ -1,7 +1,83 @@
 # OOP WP
 A simple library of OOP style helpers for WordPress theme and plugin development.
 
-## What is this?
-OOP WP is a package that give you a load of handy classes and methods to use when building things in WordPress.
+It gives you well-formatted classes for things like posts for accessing items such as the title or publish date. It can easily be extended into sub-classes in your own projects.
 
-It can give you well-formatted classes like User and Post which can then be extended into sub-classes in your own projects.
+Most of the methods are wrappers for already existing functions like `get_the_title()`
+
+## How to install
+It's recommended you install this package via [Composer](https://getcomposer.org/).
+
+```
+composer require sebkay/oop-wp
+```
+
+You'll then need to include the Composer autoloader so you have access to the package. Add the following at the top of your `functions.php` file:
+
+```
+require get_template_directory() . '/vendor/autoload.php';
+```
+
+## How to use
+Wherever you want to use one of the OOP implementations, you can do like this:
+
+```
+$blog_post = new OOPWP\Posts\Post(get_the_ID());
+
+$blog_post->title();
+```
+
+## Available Methods
+### Post
+<table>
+  <tr>
+    <th>
+      Methods
+    </th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><code>->id()</code></td>
+    <td>Outputs whatever ID is passed to the constructor.</td>
+  </tr>
+  <tr>
+    <td><code>->url()</code></td>
+    <td>Wrapper for <code>get_permalink()</code>.</td>
+  </tr>
+  <tr>
+    <td><code>->slug()</code></td>
+    <td>Returns <code>->post_name</code> from the <code>WP_Post</code> object.</td>
+  </tr>
+  <tr>
+    <td><code>->status()</code></td>
+    <td>Wrapper for <code>get_post_status()</code>.</td>
+  </tr>
+  <tr>
+    <td><code>->format()</code></td>
+    <td>Wrapper for <code>get_post_format()</code>.</td>
+  </tr>
+  <tr>
+    <td><code>->title()</code></td>
+    <td>Wrapper for <code>get_the_title()</code>.</td>
+  </tr>
+  <tr>
+    <td><code>->excerpt()</code></td>
+    <td>Wrapper for <code>get_the_excerpt()</code>.</td>
+  </tr>
+  <tr>
+    <td><code>->publishDate()</code></td>
+    <td>Wrapper for <code>get_the_date()</code>.</td>
+  </tr>
+  <tr>
+    <td><code>->modifiedDate()</code></td>
+    <td>Wrapper for <code>get_the_modified_time()</code>.</td>
+  </tr>
+  <tr>
+    <td><code>->content()</code></td>
+    <td>Returns <code>->post_content</code> from the <code>WP_Post</code> object and applies <code>the_content</code> filter.</td>
+  </tr>
+  <tr>
+    <td><code>->parent()</code></td>
+    <td>Returns a new <code>Post</code> object using <code>->post_parent</code> from the <code>WP_Post</code> object.</td>
+  </tr>
+</table>

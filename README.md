@@ -30,7 +30,7 @@ $blog_post->title();
 ```
 
 ## Available Methods
-### Post
+### OOPWP\Posts\Post
 <table>
   <tr>
     <th>
@@ -81,5 +81,67 @@ $blog_post->title();
   <tr>
     <td><code>->parent()</code></td>
     <td>Returns a new <code>Post</code> object using <code>->post_parent</code> from the <code>WP_Post</code> object.</td>
+  </tr>
+</table>
+
+### OOPWP\User
+<table>
+  <tr>
+    <th>
+      Methods
+    </th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><code>->id()</code></td>
+    <td>Outputs whatever ID is passed to the constructor.</td>
+  </tr>
+  <tr>
+    <td><code>->meta()</code></td>
+    <td>Get custom meta field.</td>
+  </tr>
+  <tr>
+    <td><code>->firstName()</code></td>
+    <td>First name meta field.</td>
+  </tr>
+  <tr>
+    <td><code>->lastName()</code></td>
+    <td>Last name meta field.</td>
+  </tr>
+  <tr>
+    <td><code>->fullName()</code></td>
+    <td>Combination of <code>->firstName()</code> and <code>->lastName()</code>.</td>
+  </tr>
+  <tr>
+    <td><code>->nickname()</code></td>
+    <td>Nickname meta field.</td>
+  </tr>
+  <tr>
+    <td><code>->description()</code></td>
+    <td>Biographical info meta field with <code>the_content</code> filter applied.</td>
+  </tr>
+  <tr>
+    <td><code>->username()</code></td>
+    <td><code>user_login</code> field from <code>WP_User</code> object.</td>
+  </tr>
+  <tr>
+    <td><code>->nicename()</code></td>
+    <td>A URL friendly version of <code>->username()</code>.<br><code>user_nicename</code> property from <code>WP_User->data</code> object.</td>
+  </tr>
+  <tr>
+    <td><code>->displayName()</code></td>
+    <td><code>display_name</code> property from <code>WP_User->data</code> object.</td>
+  </tr>
+  <tr>
+    <td><code>->email()</code></td>
+    <td><code>user_email</code> property from <code>WP_User->data</code> object.</td>
+  </tr>
+  <tr>
+    <td><code>->url()</code></td>
+    <td><code>user_url</code> property from <code>WP_User->data</code> object.</td>
+  </tr>
+  <tr>
+    <td><code>->registredDate()</code></td>
+    <td><code>user_registered</code> property from <code>WP_User->data</code> object.</td>
   </tr>
 </table>

@@ -10,20 +10,20 @@ Most of the methods are wrappers for already existing functions like `get_the_ti
 ## How to install
 It's recommended you install this package via [Composer](https://getcomposer.org/).
 
-```
+```bash
 composer require sebkay/oop-wp
 ```
 
 You'll then need to include the Composer autoloader so you have access to the package. Add the following at the top of your `functions.php` file:
 
-```
+```php
 require get_template_directory() . '/vendor/autoload.php';
 ```
 
 ## How to use
 Wherever you want to use one of the OOP implementations, you can do like this:
 
-```
+```php
 $blog_post = new OOPWP\Posts\Post(get_the_ID());
 
 $blog_post->title();

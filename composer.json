@@ -8,7 +8,6 @@
             "homepage": "https://sebkay.com"
         }
     ],
-    "type": "project",
     "autoload": {
         "psr-4": {
             "OOPWP\\": "src/"

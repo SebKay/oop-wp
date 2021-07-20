@@ -91,9 +91,8 @@ class User
     }
 
     /**
-     * Get meta
-     *
-     * @param string $key
+     * @param string $key Meta field key
+     * @param bool $single Whether to return a single value or array
      * @return mixed
      */
     public function meta(string $key, bool $single = true)

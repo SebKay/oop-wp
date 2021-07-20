@@ -6,6 +6,8 @@ class User
 {
     protected $id;
 
+    protected $WP_User;
+
     /**
      * @var string
      */
@@ -63,20 +65,20 @@ class User
      */
     public function __construct(int $id)
     {
-        $this->id = $id ?: -1;
-        $WP_User = \get_user_by('id', $this->id());
+        $this->id      = $id ?: -1;
+        $this->WP_User = \get_user_by('id', $this->id());
 
-        if (!$WP_User) {
+        if (!$this->WP_User) {
             return;
         }
 
         //---- Data
-        $this->username       = $WP_User->data->user_login;
-        $this->nicename       = $WP_User->data->user_nicename;
-        $this->displayName    = $WP_User->data->display_name;
-        $this->email          = $WP_User->data->user_email;
-        $this->url            = $WP_User->data->user_url;
-        $this->registeredDate = $WP_User->data->user_registered;
+        $this->username       = $this->WP_User->data->user_login;
+        $this->nicename       = $this->WP_User->data->user_nicename;
+        $this->displayName    = $this->WP_User->data->display_name;
+        $this->email          = $this->WP_User->data->user_email;
+        $this->url            = $this->WP_User->data->user_url;
+        $this->registeredDate = $this->WP_User->data->user_registered;
 
         //---- Meta
         $this->first_name  = $this->meta('first_name');
@@ -88,6 +90,11 @@ class User
     public function id()
     {
         return $this->id;
+    }
+
+    public function WP_User()
+    {
+        return $this->WP_User;
     }
 
     /**

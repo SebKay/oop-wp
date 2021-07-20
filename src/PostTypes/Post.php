@@ -6,6 +6,8 @@ class Post
 {
     protected $id;
 
+    protected $WP_Post;
+
     /**
      * @var string
      */
@@ -60,28 +62,33 @@ class Post
      */
     public function __construct(int $id)
     {
-        $this->id = $id ?: -1;
-        $WP_Post  = \get_post($this->id());
+        $this->id      = $id ?: -1;
+        $this->WP_Post = \get_post($this->id());
 
-        if (!$WP_Post) {
+        if (!$this->WP_Post) {
             return;
         }
 
-        $this->title        = \get_the_title($WP_Post);
-        $this->url          = \get_permalink($WP_Post);
-        $this->slug         = $WP_Post->post_name;
-        $this->content      = $WP_Post->post_content;
-        $this->status       = $WP_Post->post_status;
-        $this->format       = \get_post_format($WP_Post) ?: 'standard';
-        $this->excerpt      = \get_the_excerpt($WP_Post);
-        $this->date         = $WP_Post->post_date;
-        $this->dateModified = $WP_Post->post_modified;
-        $this->parent       = new self($WP_Post->post_parent);
+        $this->title        = \get_the_title($this->WP_Post);
+        $this->url          = \get_permalink($this->WP_Post);
+        $this->slug         = $this->WP_Post->post_name;
+        $this->content      = $this->WP_Post->post_content;
+        $this->status       = $this->WP_Post->post_status;
+        $this->format       = \get_post_format($this->WP_Post) ?: 'standard';
+        $this->excerpt      = \get_the_excerpt($this->WP_Post);
+        $this->date         = $this->WP_Post->post_date;
+        $this->dateModified = $this->WP_Post->post_modified;
+        $this->parent       = new self($this->WP_Post->post_parent);
     }
 
     public function id()
     {
         return $this->id;
+    }
+
+    public function WP_Post()
+    {
+        return $this->WP_Post;
     }
 
     public function url()

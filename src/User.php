@@ -7,33 +7,87 @@ class User
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $username;
+
+    /**
+     * @var string
+     */
+    protected $nicename;
+
+    /**
+     * @var string
+     */
+    protected $displayName;
+
+    /**
+     * @var string
+     */
+    protected $email;
+
+    /**
+     * @var string
+     */
+    protected $url;
+
+    /**
+     * @var string
+     */
+    protected $registeredDate;
+
+    /**
+     * @var string
+     */
+    protected $first_name;
+
+    /**
+     * @var string
+     */
+    protected $last_name;
+
+    /**
+     * @var string
+     */
+    protected $nickname;
+
+    /**
+     * @var string
+     */
+    protected $description;
+
+    /**
      * Set up
      *
      * @param integer $id
      */
     public function __construct(int $id)
     {
-        $this->id = ($id ?: -1);
+        $this->id = $id ?: -1;
+        $WP_User = \get_user_by('id', $this->id());
+
+        if (!$WP_User) {
+            return;
+        }
+
+        //---- Data
+        $this->username       = $WP_User->data->user_login;
+        $this->nicename       = $WP_User->data->user_nicename;
+        $this->displayName    = $WP_User->data->display_name;
+        $this->email          = $WP_User->data->user_email;
+        $this->url            = $WP_User->data->user_url;
+        $this->registeredDate = $WP_User->data->user_registered;
+
+        //---- Meta
+        $this->first_name  = $this->meta('first_name');
+        $this->last_name   = $this->meta('last_name');
+        $this->nickname    = $this->meta('nickname');
+        $this->description = $this->meta('description');
     }
 
-    /**
-     * The ID
-     *
-     * @return int
-     */
     public function id()
     {
         return $this->id;
-    }
-
-    /**
-     * Get WP_User object
-     *
-     * @return WP_User
-     */
-    protected function getUser()
-    {
-        return \get_user_by('id', $this->id());
     }
 
     /**
@@ -42,119 +96,66 @@ class User
      * @param string $key
      * @return mixed
      */
-    public function meta(string $key)
+    public function meta(string $key, bool $single = true)
     {
-        return \get_user_meta($this->id, $key, true);
+        return \get_user_meta($this->id(), $key, $single);
     }
 
-    /**
-     * Get first name
-     *
-     * @return string
-     */
     public function firstName()
     {
-        return $this->meta('first_name');
+        return $this->first_name;
     }
 
-    /**
-     * Get last name
-     *
-     * @return string
-     */
     public function lastName()
     {
-        return $this->meta('last_name');
+        return $this->last_name;
     }
 
-    /**
-     * Get full name
-     *
-     * @return string
-     */
     public function fullName()
     {
         return \trim("{$this->firstName()} {$this->lastName()}");
     }
 
-    /**
-     * Get nickname
-     *
-     * @return string
-     */
     public function nickname()
     {
-        return $this->meta('nickname');
+        return $this->nickname;
     }
 
-    /**
-     * Get biographical info
-     *
-     * @return string
-     */
     public function description()
     {
-        return \apply_filters('the_content', $this->meta('description'));
+        return \wpautop($this->description);
     }
 
-    /**
-     * Get username
-     *
-     * @return string
-     */
     public function username()
     {
-        return $this->getUser()->data->user_login;
+        return $this->username;
     }
 
     /**
-     * Get nicename
      * * A URL friendly version of username()
-     *
-     * @return string
      */
     public function nicename()
     {
-        return $this->getUser()->data->user_nicename;
+        return $this->nicename;
     }
 
-    /**
-     * Get display name
-     *
-     * @return string
-     */
     public function displayName()
     {
-        return $this->getUser()->data->display_name;
+        return $this->displayName;
     }
 
-    /**
-     * Get email address
-     *
-     * @return string
-     */
     public function email()
     {
-        return $this->getUser()->data->user_email;
+        return $this->email;
     }
 
-    /**
-     * Get website URL
-     *
-     * @return string
-     */
     public function url()
     {
-        return $this->getUser()->data->user_url;
+        return $this->url;
     }
 
-    /**
-     * Get registration date
-     *
-     * @return string
-     */
     public function registredDate()
     {
-        return $this->getUser()->data->user_registered;
+        return $this->registeredDate;
     }
 }

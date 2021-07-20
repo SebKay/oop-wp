@@ -2,6 +2,8 @@
 
 namespace OOPWP;
 
+use Carbon\Carbon;
+
 class User
 {
     protected $id;
@@ -162,6 +164,6 @@ class User
 
     public function registredDate()
     {
-        return $this->registeredDate;
+        return new Carbon($this->registeredDate);
     }
 }

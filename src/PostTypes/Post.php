@@ -2,6 +2,8 @@
 
 namespace OOPWP\PostTypes;
 
+use Carbon\Carbon;
+
 class Post
 {
     protected $id;
@@ -121,14 +123,14 @@ class Post
         return $this->excerpt;
     }
 
-    public function publishDate()
+    public function date()
     {
-        return $this->date;
+        return new Carbon($this->date);
     }
 
     public function modifiedDate()
     {
-        return $this->dateModified;
+        return new Carbon($this->dateModified);
     }
 
     /**

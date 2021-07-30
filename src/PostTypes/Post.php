@@ -135,4 +135,9 @@ class Post
     {
         return $this->parent;
     }
+
+    public function thumbnail()
+    {
+        return $this->thumbnail;
+    }
 }

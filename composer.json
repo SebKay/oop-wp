@@ -19,5 +19,8 @@
     },
     "require": {
         "nesbot/carbon": "^2.50"
+    },
+    "scripts": {
+        "lint": "./vendor/bin/phpcs --standard=PSR12 ./src"
     }
 }

@@ -75,12 +75,12 @@ class User
         }
 
         //---- Data
-        $this->username       = $this->WP_User->data->user_login;
-        $this->nicename       = $this->WP_User->data->user_nicename;
-        $this->displayName    = $this->WP_User->data->display_name;
-        $this->email          = $this->WP_User->data->user_email;
-        $this->url            = $this->WP_User->data->user_url;
-        $this->registeredDate = $this->WP_User->data->user_registered;
+        $this->username       = $this->WPUser()->data->user_login;
+        $this->nicename       = $this->WPUser()->data->user_nicename;
+        $this->displayName    = $this->WPUser()->data->display_name;
+        $this->email          = $this->WPUser()->data->user_email;
+        $this->url            = $this->WPUser()->data->user_url;
+        $this->registeredDate = $this->WPUser()->data->user_registered;
 
         //---- Meta
         $this->first_name  = $this->meta('first_name');
@@ -94,7 +94,7 @@ class User
         return $this->id;
     }
 
-    public function WP_User()
+    public function WPUser()
     {
         return $this->WP_User;
     }

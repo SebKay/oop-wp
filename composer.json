@@ -13,12 +13,16 @@
         }
     },
     "license": "MIT",
-    "require-dev": {
-        "squizlabs/php_codesniffer": "^3.5",
-        "spatie/ray": "^1.28"
-    },
     "require": {
-        "nesbot/carbon": "^2.50"
+        "php": "^7.4|^8.0",
+        "nesbot/carbon": "^2.57"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.6",
+        "spatie/ray": "^1.28",
+        "php-stubs/wordpress-tests-stubs": "^5.8",
+        "php-stubs/wordpress-stubs": "^5.9",
+        "php-stubs/wordpress-globals": "^0.2"
     },
     "scripts": {
         "lint": "./vendor/bin/phpcs --standard=PSR12 ./src"

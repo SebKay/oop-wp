@@ -32,7 +32,7 @@ $blog_post = new Post(get_the_ID());
 $blog_post->title();
 ```
 
-### Dates with `nesbot/carbon`
+### Dates with `nesbot/carbon`
 
 All dates use the [Carbon](https://github.com/briannesbitt/Carbon) PHP library.
 

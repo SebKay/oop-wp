@@ -6,7 +6,7 @@ use Carbon\Carbon;
 
 class Post
 {
-    protected $id;
+    public $id;
 
     protected $WP_Post;
 
@@ -15,17 +15,17 @@ class Post
         'thumbnail_classes' => '',
     ];
 
-    protected $title = '';
-    protected $url = '';
-    protected $slug = '';
-    protected $content = '';
-    protected $status = '';
-    protected $format = '';
-    protected $excerpt = '';
-    protected $date = '';
-    protected $dateModified = '';
-    protected $parent;
-    protected $thumbnail = '';
+    public string $title = '';
+    public string $url = '';
+    public string $slug = '';
+    public string $content = '';
+    public string $status = '';
+    public string $format = '';
+    public string $excerpt = '';
+    public Carbon $date;
+    public Carbon $dateModified = '';
+    public \WP_Post $parent;
+    public string $thumbnail = '';
 
     /**
      * Set up

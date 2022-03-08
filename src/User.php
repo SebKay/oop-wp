@@ -6,164 +6,123 @@ use Carbon\Carbon;
 
 class User
 {
-    protected $id;
+    public int $id;
 
-    protected $WP_User;
+    protected \WP_User $WP_User;
 
-    /**
-     * @var string
-     */
-    protected $username;
+    public string $username       = '';
+    public string $nicename       = '';
+    public string $displayName    = '';
+    public string $email          = '';
+    public string $url            = '';
+    public Carbon $registeredDate;
+    public string $first_name     = '';
+    public string $last_name      = '';
+    public string $full_name      = '';
+    public string $nickname       = '';
+    public string $description    = '';
 
-    /**
-     * @var string
-     */
-    protected $nicename;
-
-    /**
-     * @var string
-     */
-    protected $displayName;
-
-    /**
-     * @var string
-     */
-    protected $email;
-
-    /**
-     * @var string
-     */
-    protected $url;
-
-    /**
-     * @var string
-     */
-    protected $registeredDate;
-
-    /**
-     * @var string
-     */
-    protected $first_name;
-
-    /**
-     * @var string
-     */
-    protected $last_name;
-
-    /**
-     * @var string
-     */
-    protected $nickname;
-
-    /**
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * Set up
-     *
-     * @param integer $id
-     */
-    public function __construct(int $id)
+    public function __construct(int $id = 0)
     {
-        $this->id      = $id ?: -1;
-        $this->WP_User = \get_user_by('id', $this->id());
+        $this->id = $id;
 
-        if (!$this->WP_User) {
-            return;
-        }
+        $this->WP_User = \get_user_by('id', $this->id);
 
-        //---- Data
-        $this->username       = $this->WPUser()->data->user_login;
-        $this->nicename       = $this->WPUser()->data->user_nicename;
-        $this->displayName    = $this->WPUser()->data->display_name;
-        $this->email          = $this->WPUser()->data->user_email;
-        $this->url            = $this->WPUser()->data->user_url;
-        $this->registeredDate = $this->WPUser()->data->user_registered;
-
-        //---- Meta
-        $this->first_name  = $this->meta('first_name');
-        $this->last_name   = $this->meta('last_name');
-        $this->nickname    = $this->meta('nickname');
-        $this->description = $this->meta('description');
+        $this->full_name = \trim("{$this->first_name} {$this->last_name}");
     }
 
-    public function id()
+    public function exists()
     {
-        return $this->id;
-    }
-
-    public function WPUser()
-    {
-        return $this->WP_User;
+        return $this->WP_User->exists();
     }
 
     /**
      * @param string $key Meta field key
      * @param bool $single Whether to return a single value or array
+     *
      * @return mixed
      */
-    public function meta(string $key, bool $single = true)
+    public function getMeta(string $key, bool $single = true)
     {
-        return \get_user_meta($this->id(), $key, $single);
+        return \get_user_meta($this->id, $key, $single);
     }
 
-    public function firstName()
+    public function withAll()
     {
-        return $this->first_name;
+        $this
+            ->withUsername()
+            ->withNicename()
+            ->withEmail()
+            ->withUrl()
+            ->withRegisteredDate()
+            ->withFirstName()
+            ->withLastName()
+            ->withNickname()
+            ->withDescription();
+
+        return $this;
     }
 
-    public function lastName()
+    public function withUsername()
     {
-        return $this->last_name;
+        $this->username = $this->WP_User->data->user_login;
+
+        return $this;
     }
 
-    public function fullName()
+    public function withNicename()
     {
-        return \trim("{$this->firstName()} {$this->lastName()}");
+        $this->displayName = $this->WP_User->data->display_name;
+
+        return $this;
     }
 
-    public function nickname()
+    public function withEmail()
     {
-        return $this->nickname;
+        $this->email = $this->WP_User->data->user_email;
+
+        return $this;
     }
 
-    public function description()
+    public function withUrl()
     {
-        return \wpautop($this->description);
+        $this->url = $this->WP_User->data->user_url;
+
+        return $this;
     }
 
-    public function username()
+    public function withRegisteredDate()
     {
-        return $this->username;
+        $this->registeredDate = new Carbon($this->WP_User->data->user_registered);
+
+        return $this;
     }
 
-    /**
-     * * A URL friendly version of username()
-     */
-    public function nicename()
+    public function withFirstName()
     {
-        return $this->nicename;
+        $this->first_name = $this->getMeta('first_name');
+
+        return $this;
     }
 
-    public function displayName()
+    public function withLastName()
     {
-        return $this->displayName;
+        $this->last_name = $this->getMeta('last_name');
+
+        return $this;
     }
 
-    public function email()
+    public function withNickname()
     {
-        return $this->email;
+        $this->nickname = $this->getMeta('nickname');
+
+        return $this;
     }
 
-    public function url()
+    public function withDescription()
     {
-        return $this->url;
-    }
+        $this->description = \wpautop($this->getMeta('description'));
 
-    public function registredDate()
-    {
-        return new Carbon($this->registeredDate);
+        return $this;
     }
 }

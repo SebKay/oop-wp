@@ -8,7 +8,7 @@ class Post
 {
     public $id;
 
-    protected $WP_Post;
+    protected \WP_Post $WP_Post;
 
     public string $title   = '';
     public string $url     = '';
@@ -24,6 +24,8 @@ class Post
 
     public function __construct(int $id = 0)
     {
+        $this->id = $id;
+
         $this->WP_Post = \get_post($this->id);
     }
 

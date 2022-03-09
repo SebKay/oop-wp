@@ -22,7 +22,7 @@ class User
     public string $nickname       = '';
     public string $description    = '';
 
-    public function __construct(int $id = 0)
+    public function __construct(int $id)
     {
         $this->id = $id;
 

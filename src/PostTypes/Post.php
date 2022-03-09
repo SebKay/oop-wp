@@ -6,7 +6,7 @@ use Carbon\Carbon;
 
 class Post
 {
-    public $id;
+    public int $id;
 
     protected \WP_Post $WP_Post;
 
@@ -22,7 +22,7 @@ class Post
     public \WP_Post $parent;
     public string $thumbnailHtml = '';
 
-    public function __construct(int $id = 0)
+    public function __construct(int $id)
     {
         $this->id = $id;
 

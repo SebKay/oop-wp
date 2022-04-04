@@ -98,7 +98,7 @@ class Post
     public function withCategories()
     {
         $this->categories = \array_map(function (WP_Term $term) {
-            return new Category($term->term_id);
+            return (new Category($term->term_id))->withAll();
         }, \get_the_terms($this->WP_Post, 'category'));
 
         return $this;

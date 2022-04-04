@@ -3,6 +3,8 @@
 namespace OOPWP\PostTypes;
 
 use Carbon\Carbon;
+use OOPWP\Terms\Category;
+use WP_Term;
 
 class Post
 {
@@ -17,6 +19,12 @@ class Post
     public string $status  = '';
     public string $format  = '';
     public string $excerpt = '';
+
+    /**
+     * @var Category[]
+     */
+    public array $categories;
+
     public Carbon $publishedDate;
     public Carbon $modifiedDate;
     public \WP_Post $parent;
@@ -44,6 +52,7 @@ class Post
             ->withStatus()
             ->withFormat()
             ->withExcerpt()
+            ->withCategories()
             ->withPublishedDate()
             ->withModifiedDate()
             ->withParent();
@@ -82,6 +91,15 @@ class Post
     public function withExcerpt()
     {
         $this->excerpt = \get_the_excerpt($this->WP_Post);
+
+        return $this;
+    }
+
+    public function withCategories()
+    {
+        $this->categories = \array_map(function (WP_Term $term) {
+            return new Category($term->term_id);
+        }, \get_the_terms($this->WP_Post, 'category'));
 
         return $this;
     }

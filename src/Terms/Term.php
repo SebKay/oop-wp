@@ -13,6 +13,7 @@ class Term
     public string $name        = '';
     public string $slug        = '';
     public string $description = '';
+    public string $url         = '';
     public self $parent;
 
     public function __construct(int $id, string $taxonomy)
@@ -29,6 +30,7 @@ class Term
             ->withName()
             ->withSlug()
             ->withDescription()
+            ->withUrl()
             ->withParent();
 
         return $this;
@@ -51,6 +53,13 @@ class Term
     public function withDescription()
     {
         $this->description = $this->WP_Term->description;
+
+        return $this;
+    }
+
+    public function withUrl()
+    {
+        $this->url = \get_term_link($this->WP_Term);
 
         return $this;
     }

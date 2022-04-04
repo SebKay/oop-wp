@@ -2,6 +2,8 @@
 
 namespace OOPWP\Terms;
 
+use WP_Term;
+
 class Term
 {
     public int $id;
@@ -66,7 +68,7 @@ class Term
 
     public function withParent()
     {
-        $this->parent = new self($this->WP_Term->parent, $this->taxonomy);
+        // $this->parent = new Term($this->WP_Term->parent, $this->taxonomy);
 
         return $this;
     }

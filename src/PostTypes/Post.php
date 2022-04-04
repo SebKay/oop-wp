@@ -134,7 +134,7 @@ class Post
 
     public function withParent()
     {
-        $this->parent = new self($this->WP_Post->post_parent);
+        // $this->parent = new self($this->WP_Post->post_parent ?: 0);
 
         return $this;
     }

@@ -99,7 +99,7 @@ class Post
     {
         $this->categories = \array_map(function (WP_Term $term) {
             return (new Category($term->term_id))->withAll();
-        }, \get_the_terms($this->WP_Post, 'category'));
+        }, \get_the_terms($this->WP_Post, 'category') ?: []);
 
         return $this;
     }
